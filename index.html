@@ -1,155 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stephen Fillers | JavaScript Developer</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
+    <title>Stephen Fillers | JavaScript Dev</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-            </a>
-
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item">
-                    Home
-                </a>
-
-                <a class="navbar-item">
-                    Documentation
-                </a>
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        More
-                    </a>
-
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                            About
-                        </a>
-                        <a class="navbar-item">
-                            Jobs
-                        </a>
-                        <a class="navbar-item">
-                            Contact
-                        </a>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item">
-                            Report an issue
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a class="button is-light">
-                            Log in
-                        </a>
-                    </div>
-                </div>
+    <nav>
+        <div class="top-navigation">
+            <a class="top-navigation__logo" href="#">Stephen Fillers</a>
+            <div class="top-navigation__nav-items">
+                <a href="#about-me">About</a>
+                <a href="#featured-projects">Projects</a>
+                <a href="#contact-me">Contact</a>
             </div>
         </div>
     </nav>
 
-    <section class="hero is-medium is-primary">
-
-        <div class="hero-body columns is-vcentered">
-            <div class="column is-4 is-offset-1">
-                <figure class="image">
-                    <img class="is-rounded" src="https://bulma.io/images/placeholders/480x480.png" alt="">
-                </figure>
-            </div>
-            <div class="column is-6">
-                <p class="title">
-                    Programming, Design, and Technology
-                </p>
-                <p class="subtitle">
-                    Thanks for tuning in! This is placeholder text until I can come up with something better.
-                </p>
+    <header id="about-me">
+        <div class="container">
+            <div class="header-content">
+                <h1>Hello, World! I'm Stephen!</h1>
+                <p>Tech enthusiast and front-end developer.</p>
             </div>
         </div>
+    </header>
 
-    </section>
-
-    <section class="section columns is-vcentered">
-
-        <div class="column is-4 is-offset-1">
-            <p class="subtitle is-3">My name is <strong>Stephen Fillers</strong> and I'm a fledgling developer!</p>
-            <p>This website is my first attempt at building a portfolio from scratch using HTML, CSS, and
-                JavaScript while using Bulma as a CSS Framework. I plan to add a portfolio of my work and basic written
-                guides that help to inform or solve problems I've encountered throughout my career. I'm glad you're
-                here!</p>
-        </div>
-
-        <div class="column is-5 is-offset-1">
-            <div class="field">
-                <label class="label">Name</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="John Smith">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Email</label>
-                <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="email" placeholder="hello@stephenfillers.com">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-envelope"></i>
-                    </span>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Message</label>
-                <div class="control">
-                    <textarea class="textarea" placeholder="Type your message here"></textarea>
-                </div>
-            </div>
-
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="button is-link">Submit</button>
-                </div>
-                <div class="control">
-                    <button class="button is-link is-light">Cancel</button>
+    <section id="featured-projects">
+        <div class="container">
+            <div class="featured-projects-content">
+                <h2>Featured Projects</h2>
+                <div class="projects-container">
+                    <a href="https://github.com/stephenfillers/caser"><div class="projects-item">Caser</div></a>
+                    <a href="https://github.com/stephenfillers/web-dev-bootcamp"><div class="projects-item">Web Dev Bootcamp</div></a>
+                    <a href="https://github.com/stephenfillers/stone-mountain-meats"><div class="projects-item">Stone Mountain Meats</div></a>
+                    <a href="https://github.com/stephenfillers/portfolio-website"><div class="projects-item">Portfolio Site</div></a>
                 </div>
             </div>
         </div>
-
     </section>
 
-    <section>
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p>
-                    Copyright © 2021 <a href="#">Stephen Fillers</a>
-                </p>
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Contact Section</h2>
             </div>
-        </footer>
+        </div>
     </section>
+
+    <footer>Footer</footer>
 
 </body>
-
 </html>
