@@ -12,13 +12,14 @@
     <div class="test">
 
     <header id="about">
-        <div class="container header-container">
+        <div class="container">
             <div class="header-content">
                 <h1>Visual Design and front-end development</h1>
                 <p>Hello, world! I'm Stephen Fillers. I'm a visual designer turned web developer with a passion for learning. I'm currently focused on creating projects with JavaScript and Angular, but I'm most in my element creating accessible and easy-to-use experiences with semantic HTML and CSS.</p>
+                <a class="nav-arrow" href="#projects">↓</a>
             </div>
         </div>
-        <div class="nav-arrow"><a href="#projects">↓</a></div>
+        
     </header>
 
     <nav>
@@ -35,14 +36,33 @@
 
     <section id="projects">
         <div class="container">
-            <div class="featured-projects-content">
-                <h2>Featured Projects</h2>
-                <div class="projects-container">
-                    <a href="https://github.com/stephenfillers/caser" target="_blank" rel="noopener noreferrer"><div class="projects-item">Caser</div></a>
-                    <a href="https://github.com/stephenfillers/web-dev-bootcamp" target="_blank" rel="noopener noreferrer"><div class="projects-item">Web Dev Bootcamp</div></a>
-                    <a href="https://github.com/stephenfillers/stone-mountain-meats" target="_blank" rel="noopener noreferrer"><div class="projects-item">Stone Mountain Meats</div></a>
-                    <a href="https://github.com/stephenfillers/portfolio-website" target="_blank" rel="noopener noreferrer"><div class="projects-item">Portfolio Site</div></a>
+            <h2>Featured Projects</h2>                
+            <div class="projects-container">
+
+                <div class="project-card">
+                    <div class="project-card__image"><img src="./assets/caser.jpg"></div>
+                    <div class="project-card__text">
+                        <p>Caser is my text-casing web app. Built using Bootstrap and vanilla JavaScript, Caser is an app born out of nesessity. Bookmark it, use it, and let me know what you think.</p>
+                        <a href="https://github.com/stephenfillers/caser"><button>Learn More</button></a>
+                    </div>
                 </div>
+
+                <div class="project-card">
+                    <div class="project-card__image"><img src="./assets/portfolio.jpg"></div>
+                    <div class="project-card__text">
+                        <p>The website you're on right now. After tiring of WordPress and wanting to create my own website by hand, this project arose. Built with HTML, CSS, and JavaScript.</p>
+                        <a href="https://github.com/stephenfillers/portfolio-website"><button>Learn More</button></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-card__image"><img src="./assets/meats.jpg"></div>
+                    <div class="project-card__text">
+                        <p>Stone Mountain Meats is a project for my family. The application you see here is intended to make the shop owner's life a bit easier by automating paperwork.</p>
+                        <a href="https://github.com/stephenfillers/stone-mountain-meats"><button>Learn More</button></a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
