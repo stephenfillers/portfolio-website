@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;600;800&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;600;800&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap");
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 
 :root {
@@ -12,12 +13,13 @@
 * {
   padding: 0;
   margin: 0;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", monospace;
   scroll-padding-top: 100px;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: #1e1e1e;
 }
 
 h1 {
@@ -72,20 +74,16 @@ textarea {
   padding: 2em 0;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
 header {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(
-    131deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  background-size: 300% 300%;
-  -webkit-animation: animated-background 15s ease infinite;
-  -moz-animation: animated-background 15s ease infinite;
-  animation: animated-background 15s ease infinite;
   position: relative;
 }
 
@@ -131,13 +129,13 @@ header {
 }
 
 .header-content h1 {
-  font-size: 76px;
-  line-height: 100px;
-  margin-bottom: 1em;
+  font-size: 36px;
+  /* line-height: 100px; */
+  /* margin-bottom: 1em; */
 }
 
 .header-content p {
-  font-size: 22px;
+  font-size: 16px;
   line-height: 36px;
 }
 
@@ -154,9 +152,10 @@ header {
 }
 
 nav {
-  position: sticky;
-  top: 0;
-  background: #000;
+  /* position: sticky; */
+  /* top: 0; */
+  /* background: #000; */
+  color: #fff;
 }
 
 .top-navigation {
