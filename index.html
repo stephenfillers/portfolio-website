@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stephen Fillers | JavaScript Developer</title>
+    <title>Stephen Fillers - Software Developer</title>
     <link rel="stylesheet" href="style.css" />
     <script
       src="https://kit.fontawesome.com/71c9333e08.js"
@@ -12,60 +12,45 @@
     ></script>
   </head>
   <body>
-    <div class="grid-container">
-      <div class="left-column">
-        <nav>
-          <p>About</p>
-          <p>Projects</p>
-          <p>Skills</p>
-          <p>Contacts</p>
-        </nav>
+    <main class="grid-container">
+      <div class="side-nav">
+        <aside>
+          <a href="#about" class="nav-item selected-nav-item">About</a>
+          <a href="#projects" class="nav-item">Projects</a>
+          <a href="#skills" class="nav-item">Skills</a>
+          <a href="#resume" class="nav-item">Resume</a>
+        </aside>
       </div>
-      <div class="right-column">
+      <div class="main-content">
         <header id="about">
-          <div class="container">
-            <div class="header-content">
-              <!-- <h1>End-to-end software development</h1> -->
-              <h1>
-                Hi, I’m Stephen! I’m an ex-marketing director with a passion for
-                software and design.
-              </h1>
+          <div class="header-content">
+            <h1>
+              Hi, I’m Stephen! I’m an ex-marketing director with a passion for
+              software and design.
+            </h1>
+            <h2>About</h2>
 
-              <p>
-                What began as a career in graphic design soon shifted into a
-                director-level marketing role. My passion, however, was leading
-                me to something different. After a few months of long nights
-                teaching myself to code, I officially transitioned into the
-                world of professional software development.
-              </p>
+            <p>
+              What began as a career in graphic design soon shifted into a
+              director-level marketing role. My passion, however, was leading me
+              to something different. After a few months of long nights teaching
+              myself to code, I officially transitioned into the world of
+              professional software development.
+            </p>
 
-              <p>
-                As a designer/marketer-turned-developer, I’m uniquely positioned
-                to build unique, user-focused products end-to-end while also
-                helping to bridge any communication gaps between marketing and
-                technical teams.
-              </p>
-              <a class="nav-arrow" href="#projects">↓</a>
-            </div>
+            <p>
+              As a designer/marketer-turned-developer, I’m uniquely positioned
+              to build unique, user-focused products end-to-end while also
+              helping to bridge any communication gaps between marketing and
+              technical teams.
+            </p>
           </div>
         </header>
 
-        <!-- <nav>
-      <div class="top-navigation">
-        <a class="top-navigation__logo" href="#">Stephen Fillers</a>
-        <div class="top-navigation__nav-items">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </div>
-    </nav> -->
-
         <section id="projects">
-          <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="projects-container">
+          <h2>Projects</h2>
+          <div class="project-cards">
+            <div class="card-column">
               <div class="project-card">
                 <div class="project-card__image">
                   <img src="./assets/caser.jpg" />
@@ -85,7 +70,7 @@
                 </div>
               </div>
 
-              <div class="project-card">
+              <!-- <div class="project-card">
                 <div class="project-card__image">
                   <img src="./assets/portfolio.jpg" />
                 </div>
@@ -102,8 +87,10 @@
                     ><button>Learn More</button></a
                   >
                 </div>
-              </div>
+              </div> -->
+            </div>
 
+            <!-- <div class="card-column">
               <div class="project-card">
                 <div class="project-card__image">
                   <img src="./assets/meats.jpg" />
@@ -122,7 +109,7 @@
                   >
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </section>
 
@@ -131,26 +118,28 @@
             <div class="skills-content">
               <h2>Skills</h2>
               <div class="skills-items">
-                <div class="skills-item">JavaScript</div>
-                <div class="skills-item">TypeScript</div>
+                <div class="skills-item">JavaScript/TypeScript</div>
                 <div class="skills-item">Angular</div>
                 <div class="skills-item">HTML</div>
                 <div class="skills-item">CSS</div>
-                <div class="skills-item">Bootstrap</div>
-                <div class="skills-item">Mailgun</div>
+                <div class="skills-item">AWS</div>
                 <div class="skills-item">Git</div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="contact">
+        <section id="resume">
+          <h2>Resume</h2>
+        </section>
+
+        <!-- <section id="contact">
           <div class="container contact-container">
             <div class="contact-content">
               <h2>Let's Work Together</h2>
               <p>
                 Need assistance making your next great website or application?
-                Contact me today and let's discuss what you have in mind.
+                Let's discuss what you have in mind.
               </p>
             </div>
             <div class="contact-form">
@@ -165,25 +154,25 @@
               </form>
             </div>
           </div>
-        </section>
+        </section> -->
+        <!-- <footer>
+        <div class="footer-copyright">Copyright © 2022, Stephen Fillers</div>
+        <div class="footer-links">
+          <a
+            href="https://www.linkedin.com/in/stephenfillers/"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="https://github.com/stephenfillers"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fab fa-github"></i
+          ></a>
+        </div>
+      </footer> -->
       </div>
-    </div>
-    <footer>
-      <div class="footer-copyright">Copyright © 2022, Stephen Fillers</div>
-      <div class="footer-links">
-        <a
-          href="https://www.linkedin.com/in/stephenfillers/"
-          target="_blank"
-          rel="noopener noreferrer"
-          ><i class="fab fa-linkedin"></i
-        ></a>
-        <a
-          href="https://github.com/stephenfillers"
-          target="_blank"
-          rel="noopener noreferrer"
-          ><i class="fab fa-github"></i
-        ></a>
-      </div>
-    </footer>
+    </main>
   </body>
 </html>
