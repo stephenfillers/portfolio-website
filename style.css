@@ -116,22 +116,61 @@ img {
 
 .project-cards {
   display: flex;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 .card-column {
   display: flex;
   flex-direction: column;
-}
-
-.project-card {
-  background-color: #fff;
-  border-radius: 1rem;
-  padding: 1em;
-  color: black;
   flex: 1;
 }
 
-.project-card__text {
+.project-card {
+  border-radius: 1rem;
+  padding: 2rem;
+  color: black;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85)),
+    url("./assets/caser-dark.png");
+  background-size: cover;
+  background-position: top;
+  display: block;
+  height: 400px;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.project-card__title {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.project-card__tags {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #959595;
+  margin: 0 0 1rem 0;
+}
+
+.project-card__tags > span {
+  margin-right: 0.25rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+}
+
+.project-card__actions > a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-right: 0.25rem;
+}
+
+/* .project-card__text {
   padding: 1em;
   display: flex;
   flex-direction: column;
@@ -162,7 +201,7 @@ img {
 .project-card__text button:hover {
   cursor: pointer;
   box-shadow: 1px 1px 10px #dddddd;
-}
+} */
 
 .skills-items {
   display: flex;
@@ -227,4 +266,8 @@ img {
     flex-direction: column;
     margin: 0 0 1rem 0;
   }
+
+  /* .project-card {
+    background-size: contain;
+  } */
 }
