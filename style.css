@@ -57,6 +57,10 @@ main {
 header,
 section {
   margin-bottom: 3rem;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  scroll-snap-align: center;
 }
 
 img {
@@ -96,23 +100,17 @@ img {
   color: #fff;
 }
 
-.selected-nav-item {
+.active-nav-item,
+.nav-item:hover {
   background-color: #8325fd;
   transition: background-color 0.125s;
 }
 
-/* #header {
-  display: grid;
-  align-content: center;
-  min-height: 100vh;
-} */
-
-#about {
+/* #about {
   display: grid;
   align-content: center;
   margin-top: 50%;
-  /* min-height: 100vh; */
-}
+} */
 
 .project-cards {
   display: flex;
@@ -169,39 +167,6 @@ img {
   font-size: 0.9rem;
   margin-right: 0.25rem;
 }
-
-/* .project-card__text {
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.project-card__text a {
-  width: 100%;
-}
-
-.project-card__text p {
-  text-justify: inter-character;
-  text-align: center;
-  line-height: 24px;
-}
-
-.project-card__text button {
-  font-size: 14px;
-  color: #fff;
-  background: var(--primary-color);
-  padding: 1em;
-  border: none;
-  border-radius: 0.25em;
-  margin-top: 3em;
-  width: 100%;
-}
-
-.project-card__text button:hover {
-  cursor: pointer;
-  box-shadow: 1px 1px 10px #dddddd;
-} */
 
 .skills-items {
   display: flex;
@@ -266,8 +231,4 @@ img {
     flex-direction: column;
     margin: 0 0 1rem 0;
   }
-
-  /* .project-card {
-    background-size: contain;
-  } */
 }

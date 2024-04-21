@@ -6,17 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stephen Fillers - Software Developer</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- <script
-      src="https://kit.fontawesome.com/71c9333e08.js"
-      crossorigin="anonymous"
-    ></script> -->
     <script defer src="script.js"></script>
   </head>
   <body>
     <main class="grid-container">
       <div class="side-nav">
         <aside class="nav-items-container">
-          <a href="#about" class="nav-item selected-nav-item">About</a>
+          <a href="#about" class="nav-item active-nav-item">About</a>
           <a href="#projects" class="nav-item">Projects</a>
           <a href="#skills" class="nav-item">Skills</a>
           <a href="#resume" class="nav-item">Resume</a>
@@ -24,7 +20,7 @@
         </aside>
       </div>
       <div class="main-content">
-        <header id="about">
+        <header id="about" class="section">
           <div class="header-content">
             <h1>
               Hi, I’m Stephen! 👋🏼 I’m a
@@ -50,65 +46,41 @@
           </div>
         </header>
 
-        <section id="projects">
-          <h2>Projects</h2>
-          <div class="project-cards">
-            <div class="card-column">
-              <div class="project-card">
-                <div class="project-card__details">
-                  <p class="project-card__title">Caser</p>
-                  <div class="project-card__tags">
-                    <span>JavaScript</span>
-                    <span>HTML</span>
-                    <span>CSS</span>
-                  </div>
-                  <div class="project-card__actions">
-                    <a
-                      href="https://main.d2knjhecnob9up.amplifyapp.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >Demo</a
-                    >
-                    <a
-                      href="https://github.com/stephenfillers/caser"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >Source</a
-                    >
+        <section id="projects" class="section">
+          <div>
+            <h2>Projects</h2>
+            <div class="project-cards">
+              <div class="card-column">
+                <div class="project-card">
+                  <div class="project-card__details">
+                    <p class="project-card__title">Caser</p>
+                    <div class="project-card__tags">
+                      <span>JavaScript</span>
+                      <span>HTML</span>
+                      <span>CSS</span>
+                    </div>
+                    <div class="project-card__actions">
+                      <a
+                        href="https://main.d2knjhecnob9up.amplifyapp.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Demo</a
+                      >
+                      <a
+                        href="https://github.com/stephenfillers/caser"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Source</a
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- <div class="card-column">
-              <div class="project-card">
-                <div class="project-card__details">
-                  <p class="project-card__title">Text-casing app</p>
-                  <div class="project-card__tags">
-                    <span>JavaScript</span>
-                    <span>HTML</span>
-                    <span>CSS</span>
-                  </div>
-                  <div class="project-card__actions">
-                    <a
-                      href="https://main.d2knjhecnob9up.amplifyapp.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >Demo</a
-                    >
-                    <a
-                      href="https://github.com/stephenfillers/caser"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >Source</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
         </section>
 
-        <section id="skills">
+        <section id="skills" class="section">
           <div class="container">
             <div class="skills-content">
               <h2>Skills</h2>
@@ -129,90 +101,77 @@
           </div>
         </section>
 
-        <section id="resume">
-          <h2>Resume</h2>
-          <h3>Work experience</h3>
-          <div class="resume-row">
-            <p class="resume-date">11/2021 - Current</p>
-            <div class="resume-details">
-              <p class="resume-title">Software Developer, DLZP Group</p>
-              <p class="resume-stats">Full-time / Fully remote</p>
+        <section id="resume" class="section">
+          <div>
+            <h2>Resume</h2>
+            <h3>Work experience</h3>
+            <div class="resume-row">
+              <p class="resume-date">11/2021 - Current</p>
+              <div class="resume-details">
+                <p class="resume-title">Software Developer, DLZP Group</p>
+                <p class="resume-stats">Full-time / Fully remote</p>
+              </div>
             </div>
-          </div>
-          <div class="resume-row">
-            <p class="resume-date">05/2019 – 11/2021</p>
-            <div class="resume-details">
-              <p class="resume-title">
-                Director of Digital Media Marketing, King University
-              </p>
-              <p class="resume-stats">Full-time / Bristol, TN</p>
+            <div class="resume-row">
+              <p class="resume-date">05/2019 – 11/2021</p>
+              <div class="resume-details">
+                <p class="resume-title">
+                  Director of Digital Media Marketing, King University
+                </p>
+                <p class="resume-stats">Full-time / Bristol, TN</p>
+              </div>
             </div>
-          </div>
-          <div class="resume-row">
-            <p class="resume-date">06/2012 – 05/2019</p>
-            <div class="resume-details">
-              <p class="resume-title">
-                Visual Design and Development Manager, AAM USA, Inc.
-              </p>
-              <p class="resume-stats">Full-time / Piney Flats, TN</p>
+            <div class="resume-row">
+              <p class="resume-date">06/2012 – 05/2019</p>
+              <div class="resume-details">
+                <p class="resume-title">
+                  Visual Design and Development Manager, AAM USA, Inc.
+                </p>
+                <p class="resume-stats">Full-time / Piney Flats, TN</p>
+              </div>
             </div>
-          </div>
-          <h3>Education</h3>
-          <div class="resume-row">
-            <p class="resume-date">2009 – 2013</p>
-            <div class="resume-details">
-              <p class="resume-title">East Tennesee State University</p>
-              <p class="resume-stats">
-                B.S. in Digital Media / Johnson City, TN
-              </p>
+            <h3>Education</h3>
+            <div class="resume-row">
+              <p class="resume-date">2009 – 2013</p>
+              <div class="resume-details">
+                <p class="resume-title">East Tennesee State University</p>
+                <p class="resume-stats">
+                  B.S. in Digital Media / Johnson City, TN
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="contact">
-          <h2>Contact</h2>
-          <ul class="contact-list">
-            <li>
-              📪
-              <a href="mailto:hello@stephenfillers.com">Email me</a>
-            </li>
-            <li>
-              🤝
-              <a
-                href="https://www.linkedin.com/in/stephenfillers/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Connect on LinkedIn</a
-              >
-            </li>
-            <li>
-              👨🏼‍💻
-              <a
-                href="https://github.com/stephenfillers"
-                target="_blank"
-                rel="noopener noreferrer"
-                >View my GitHub</a
-              >
-            </li>
-          </ul>
+        <section id="contact" class="section">
+          <div>
+            <h2>Contact</h2>
+            <ul class="contact-list">
+              <li>
+                📪
+                <a href="mailto:hello@stephenfillers.com">Email me</a>
+              </li>
+              <li>
+                🤝
+                <a
+                  href="https://www.linkedin.com/in/stephenfillers/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Connect on LinkedIn</a
+                >
+              </li>
+              <li>
+                👨🏼‍💻
+                <a
+                  href="https://github.com/stephenfillers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View my GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
         </section>
-        <!-- <footer>
-        <div class="footer-copyright">Copyright © 2022, Stephen Fillers</div>
-        <div class="footer-links">
-          <a
-            href="https://www.linkedin.com/in/stephenfillers/"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-linkedin"></i
-          ></a>
-          <a
-            href="https://github.com/stephenfillers"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-github"></i
-          ></a>
-        </div>
-      </footer> -->
       </div>
     </main>
   </body>
