@@ -1,5 +1,6 @@
 :root {
-  /* Palette: orange leads, purple only glows in the background. */
+  /* Palette: purple on near-black. --accent is the lighter purple that stays
+     readable as text; --accent-strong fills buttons behind white text. */
   --bg: #0a0a0b;
   --surface: #131315;
   --surface-2: #1a1a1d;
@@ -8,11 +9,12 @@
   --text: #ededed;
   --muted: #a1a1aa;
   --subtle: #71717a;
-  --accent: #f6821f;
-  --accent-hover: #ff9a45;
-  --accent-soft: rgba(246, 130, 31, 0.12);
-  --on-accent: #0a0a0b;
-  /* Set --glow to the accent color for an orange-only look. */
+  --accent: #a371ff;
+  --accent-hover: #b993ff;
+  --accent-strong: #8325fd;
+  --accent-strong-hover: #9445ff;
+  --accent-soft: rgba(163, 113, 255, 0.12);
+  --on-accent: #ffffff;
   --glow: #8325fd;
 
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -76,7 +78,7 @@ button {
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--on-accent);
 }
 
@@ -101,7 +103,7 @@ button {
   top: -3rem;
   z-index: 100;
   padding: 0.5rem 1rem;
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--on-accent);
   border-radius: var(--radius-sm);
   font-weight: 600;
@@ -164,12 +166,12 @@ button {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--on-accent);
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover);
+  background: var(--accent-strong-hover);
 }
 
 /* Light sweep across primary buttons on hover */
@@ -180,7 +182,7 @@ button {
   background: linear-gradient(
     110deg,
     transparent 30%,
-    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.3) 50%,
     transparent 70%
   );
   transform: translateX(-120%);
@@ -429,13 +431,13 @@ button {
   animation: drift 22s ease-in-out infinite alternate;
 }
 
-.blob-orange {
+.blob-accent {
   width: 26rem;
   height: 26rem;
   bottom: -10rem;
   left: -8rem;
-  background: var(--accent);
-  opacity: 0.18;
+  background: #c026d3;
+  opacity: 0.14;
   animation: drift 26s ease-in-out infinite alternate-reverse;
 }
 
@@ -458,7 +460,7 @@ button {
   transition: opacity 0.5s;
   background: radial-gradient(
     500px circle at var(--mx, 50%) var(--my, 40%),
-    rgba(246, 130, 31, 0.09),
+    rgba(163, 113, 255, 0.09),
     transparent 60%
   );
 }
@@ -486,16 +488,16 @@ button {
   height: 0.5rem;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 0 rgba(246, 130, 31, 0.6);
+  box-shadow: 0 0 0 0 rgba(163, 113, 255, 0.6);
   animation: pulse 2.4s infinite;
 }
 
 @keyframes pulse {
   70% {
-    box-shadow: 0 0 0 8px rgba(246, 130, 31, 0);
+    box-shadow: 0 0 0 8px rgba(163, 113, 255, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(246, 130, 31, 0);
+    box-shadow: 0 0 0 0 rgba(163, 113, 255, 0);
   }
 }
 
