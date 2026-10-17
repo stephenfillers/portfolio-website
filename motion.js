@@ -213,7 +213,7 @@ if (document.documentElement.classList.contains("gsap")) {
     });
   });
 
-  // Projects: card rises, screenshot wipes in, image parallaxes inside its frame
+  // Projects: card rises, screenshot wipes in, its window rises as you scroll
 
   gsap.utils.toArray(".project-card").forEach((card) => {
     const media = card.querySelector(".project-media");
@@ -239,18 +239,27 @@ if (document.documentElement.classList.contains("gsap")) {
     // Compact cards have no screenshot to wipe in or parallax
     if (!media) return;
 
-    const img = media.querySelector("img");
+    const frame = media.querySelector(".project-frame");
 
     intro.from(media, { clipPath: "inset(0% 0% 100% 0%)", duration: 1.3, ease: "expo.inOut" }, 0);
 
+    // The whole window rises into place from just below its resting spot.
+    // Stacked cards frame the window on all sides, so it stays put there
+    const stacked = window.matchMedia("(max-width: 860px)");
+
     gsap.fromTo(
-      img,
-      { scale: 1.2, yPercent: -5 },
+      frame,
+      { y: () => (stacked.matches ? 0 : 48) },
       {
-        scale: 1.05,
-        yPercent: 5,
+        y: 0,
         ease: "none",
-        scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true },
+        scrollTrigger: {
+          trigger: card,
+          start: "top bottom",
+          end: "center center",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
       }
     );
   });
