@@ -36,6 +36,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
     <script defer src="script.js"></script>
     <script defer src="motion.js"></script>
+    <script defer src="egg.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -70,8 +71,6 @@
       <section id="top" class="section hero">
         <div class="hero-bg" aria-hidden="true">
           <div class="grid-dots"></div>
-          <div class="blob blob-purple"></div>
-          <div class="blob blob-accent"></div>
           <div class="spotlight"></div>
         </div>
 
@@ -247,12 +246,27 @@
       <section id="skills" class="section">
         <div class="container">
           <p class="section-label reveal">03 / Skills</p>
-          <h2 class="section-title reveal" style="--i: 1">
-            Tools I work with
-          </h2>
+          <div class="skills-head">
+            <h2 class="section-title reveal" style="--i: 1">
+              Tools I work with
+            </h2>
+            <button
+              class="btn btn-sm play-btn"
+              id="play-btn"
+              type="button"
+              aria-pressed="false"
+              title="Fly a ship and shoot my skills. Arrows to fly, Space to fire."
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3l7 17-7-4-7 4z" />
+              </svg>
+              <span class="play-label">Press start</span>
+              <span class="sr-only">: fly a ship and shoot these skills</span>
+            </button>
+          </div>
 
           <div class="skill-groups">
-            <div class="skill-group reveal" style="--i: 2">
+            <div class="skill-group reveal" style="--i: 2; --brick: var(--brick-red)">
               <h3>Languages</h3>
               <ul class="chips">
                 <li>JavaScript</li>
@@ -262,16 +276,31 @@
                 <li>CSS</li>
               </ul>
             </div>
-            <div class="skill-group reveal" style="--i: 3">
-              <h3>Frameworks &amp; platforms</h3>
+            <div class="skill-group reveal" style="--i: 3; --brick: var(--brick-orange)">
+              <h3>Frontend</h3>
               <ul class="chips">
+                <li>Astro</li>
+                <li>Svelte</li>
+                <li>MDX</li>
                 <li>Angular</li>
-                <li>Node</li>
-                <li>AWS</li>
-                <li>Git</li>
               </ul>
             </div>
-            <div class="skill-group reveal" style="--i: 4">
+            <div class="skill-group reveal" style="--i: 4; --brick: var(--brick-yellow)">
+              <h3>Backend &amp; cloud</h3>
+              <ul class="chips">
+                <li>Node.js</li>
+                <li>AWS</li>
+                <li>Cloudflare</li>
+              </ul>
+            </div>
+            <div class="skill-group reveal" style="--i: 5; --brick: var(--brick-green)">
+              <h3>Tooling &amp; workflow</h3>
+              <ul class="chips">
+                <li>Git</li>
+                <li>CI/CD</li>
+              </ul>
+            </div>
+            <div class="skill-group reveal" style="--i: 6; --brick: var(--brick-blue)">
               <h3>Design</h3>
               <ul class="chips">
                 <li>Figma</li>
