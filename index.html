@@ -198,10 +198,274 @@
                       <path d="M7 17 17 7M8 7h9v9" />
                     </svg>
                   </a>
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    type="button"
+                    data-case-study="case-king"
+                    aria-haspopup="dialog"
+                  >
+                    Case study
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </article>
           </div>
+
+          <dialog class="case-study" id="case-king" aria-labelledby="case-king-title">
+            <div class="cs-shell">
+              <div class="cs-flipper">
+                <div class="cs-face cs-front" aria-hidden="true"></div>
+                <div class="cs-face cs-back">
+                  <p class="cs-cover" aria-hidden="true">
+                    <span class="project-meta">Case study</span>
+                    <span class="cs-cover-title">King University</span>
+                  </p>
+
+                  <div class="cs-scroll">
+                    <button class="cs-close" type="button" aria-label="Close case study">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 6l12 12M18 6 6 18" />
+                      </svg>
+                    </button>
+
+                    <div class="cs-content">
+                      <header class="cs-header">
+                        <p class="project-meta">Case study · Sept 2025 – present</p>
+                        <h2 class="cs-title" id="case-king-title">Rebuilding king.edu</h2>
+                        <p class="cs-lede">
+                          King University’s website moved from WordPress on WP
+                          Engine to a static Astro site on AWS. As the sole
+                          developer, I led the project end to end: migrating the
+                          content, designing and building the front end, standing
+                          up the infrastructure, and maintaining the site since
+                          launch.
+                        </p>
+                      </header>
+
+                      <dl class="cs-facts">
+                        <div>
+                          <dt>Role</dt>
+                          <dd>Sole developer</dd>
+                        </div>
+                        <div>
+                          <dt>Content</dt>
+                          <dd>1,239 MDX pages</dd>
+                        </div>
+                        <div>
+                          <dt>Commits</dt>
+                          <dd>740+</dd>
+                        </div>
+                        <div>
+                          <dt>Stack</dt>
+                          <dd>Astro, Svelte, AWS</dd>
+                        </div>
+                      </dl>
+
+                      <section class="cs-section">
+                        <h3>Migrating from WordPress</h3>
+                        <p>
+                          The old site was built on the Flynt theme, so every
+                          page was a stack of Flynt modules stored in the
+                          WordPress database. I wrote a converter that read the
+                          WordPress export and turned each page, news post,
+                          event, person and program into an MDX file in an
+                          Astro content collection.
+                        </p>
+                        <ul class="cs-list">
+                          <li>
+                            Frontmatter kept what the site needs to route and
+                            sort: title, type, date, status, permalink and the
+                            original post ID.
+                          </li>
+                          <li>
+                            Flynt modules became Astro components that the MDX
+                            imports: Spotlight, Image, FacultyCards, Accordion,
+                            DocumentLink, ImageText, DataTable, Slideshow,
+                            Video and PromotedCallout.
+                          </li>
+                          <li>
+                            The first import landed as one commit: 1,212 files
+                            and about 98,000 lines.
+                          </li>
+                        </ul>
+                        <p>
+                          The remaining work was cleanup and consolidation:
+                          resolving content that broke the build, defining a typed
+                          schema for each collection, moving uploads from
+                          <code>/wp-content/uploads/</code> to media.king.edu,
+                          importing WP Engine’s redirects, and re-syncing from the
+                          live site twice while editors continued their work. In
+                          May 2026 I also brought in the program pages from the
+                          separate online.king.edu site.
+                        </p>
+                      </section>
+
+                      <section class="cs-section">
+                        <h3>Features</h3>
+                        <div class="cs-features">
+                          <div>
+                            <h4>Program finder</h4>
+                            <p>
+                              A Svelte filter over 70+ programs, with grid and
+                              list views that persist between visits, sort
+                              groups, and a modal per program with its own
+                              apply link.
+                            </p>
+                          </div>
+                          <div>
+                            <h4>Search</h4>
+                            <p>
+                              Site-wide Pagefind search with tuned ranking,
+                              navigation kept out of the index, and recent
+                              searches and quick links when the box is empty.
+                            </p>
+                          </div>
+                          <div>
+                            <h4>Forms</h4>
+                            <p>
+                              Form definitions live in DynamoDB. A Svelte form
+                              renders them, Turnstile stops spam, and a Lambda
+                              stores each submission and emails it out through
+                              SES.
+                            </p>
+                          </div>
+                          <div>
+                            <h4>Live webcasts</h4>
+                            <p>
+                              Chapel services stream on YouTube. A Lambda
+                              reports when the channel is live, which drives the
+                              live badge, the schedule and past broadcasts.
+                            </p>
+                          </div>
+                          <div>
+                            <h4>Navigation</h4>
+                            <p>
+                              Menus are defined in TypeScript, and one
+                              unit-tested matcher places each page in them for
+                              the breadcrumb, section nav and sidebar.
+                            </p>
+                          </div>
+                          <div>
+                            <h4>People, news and events</h4>
+                            <p>
+                              A filterable directory of 220+ faculty and staff,
+                              and news and events with sorting, filters and
+                              featured slots.
+                            </p>
+                          </div>
+                        </div>
+                        <p>
+                          Smaller tools include filterable, paginated data
+                          tables, an interactive study abroad map, a scholarship
+                          finder, statistics calculators, a Virtual Calm Room,
+                          and a design system page that presents every component
+                          side by side.
+                        </p>
+                      </section>
+
+                      <section class="cs-section">
+                        <h3>Infrastructure</h3>
+                        <ul class="cs-list">
+                          <li>The static build is served from S3 behind CloudFront.</li>
+                          <li>
+                            GitHub Actions deploys <code>main</code> to king.edu
+                            and <code>stage</code> to a password-protected staging
+                            site defined in CloudFormation. Deploys assume IAM
+                            roles through OIDC, so no AWS keys are stored.
+                          </li>
+                          <li>
+                            CloudFront routes <code>/api/*</code> to API Gateway
+                            and Lambda for forms and webcast status.
+                          </li>
+                          <li>
+                            Redirects run at the edge in a CloudFront Function
+                            backed by a KeyValueStore, so adding one needs no
+                            deploy.
+                          </li>
+                        </ul>
+                      </section>
+
+                      <section class="cs-section">
+                        <h3>Quality checks</h3>
+                        <p>
+                          One command, <code>npm run verify</code>, type checks,
+                          checks formatting, runs the Vitest suite, builds the
+                          site, and fails on any internal link or asset that
+                          doesn’t resolve. CI runs it on every pull request and a
+                          pre-push hook runs it locally. The site has stayed
+                          current with Astro from version 5 through 7.
+                        </p>
+                      </section>
+
+                      <section class="cs-section">
+                        <h3>Timeline</h3>
+                        <ol class="cs-timeline">
+                          <li>
+                            <span class="mono">Sep 2025</span>
+                            Started the Astro project
+                          </li>
+                          <li>
+                            <span class="mono">Oct 2025</span>
+                            Imported the converted content and set up deploys to
+                            S3 and CloudFront
+                          </li>
+                          <li>
+                            <span class="mono">Jan 2026</span>
+                            Brought over WP Engine’s redirects and made the
+                            navigation accessible
+                          </li>
+                          <li>
+                            <span class="mono">Apr 2026</span>
+                            Re-synced content and moved media to media.king.edu
+                          </li>
+                          <li>
+                            <span class="mono">May 2026</span>
+                            Merged in online.king.edu’s programs and consolidated
+                            the forms
+                          </li>
+                          <li>
+                            <span class="mono">Summer 2026</span>
+                            Added data tables, scholarships, YouTube webcasts and
+                            the study abroad map
+                          </li>
+                          <li>
+                            <span class="mono">Oct 2026</span>
+                            Redesigned the home page, header and navigation, and
+                            moved deploys to OIDC
+                          </li>
+                        </ol>
+                        <p>
+                          Ongoing content updates, including staff changes,
+                          events, news and policy revisions, also go through
+                          git. A scaffolding script creates each new entry with
+                          its ID and slug.
+                        </p>
+                      </section>
+
+                      <footer class="cs-footer">
+                        <a
+                          class="btn btn-primary btn-sm"
+                          href="https://www.king.edu/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Visit king.edu
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 17 17 7M8 7h9v9" />
+                          </svg>
+                        </a>
+                        <button class="btn btn-ghost btn-sm cs-close-text" type="button">
+                          Back to projects
+                        </button>
+                      </footer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </dialog>
 
           <div class="project-grid project-grid--compact">
             <article class="project-card project-card--compact reveal" style="--i: 2">

@@ -151,6 +151,158 @@ if (finePointer.matches) {
   });
 }
 
+// Case study: the card flips over where it sits, then grows into a large
+// panel. Closing runs it backwards and lands the card back in the grid
+
+const flipEase = "cubic-bezier(0.65, 0, 0.35, 1)";
+const growEase = "cubic-bezier(0.22, 1, 0.36, 1)";
+
+const rectFrame = (r) => ({
+  left: `${r.left}px`,
+  top: `${r.top}px`,
+  width: `${r.width}px`,
+  height: `${r.height}px`,
+});
+
+const panelRect = function () {
+  const vw = document.documentElement.clientWidth;
+  const vh = window.innerHeight;
+  const margin = Math.min(48, Math.max(12, vw * 0.04));
+  const width = Math.min(960, vw - margin * 2);
+  const height = vh - margin * 2;
+  return { left: (vw - width) / 2, top: margin, width, height };
+};
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+document.querySelectorAll("[data-case-study]").forEach((trigger) => {
+  const card = trigger.closest(".project-card");
+  const dialog = document.getElementById(trigger.dataset.caseStudy);
+  const shell = dialog.querySelector(".cs-shell");
+  const flipper = dialog.querySelector(".cs-flipper");
+  const front = dialog.querySelector(".cs-front");
+  const scroller = dialog.querySelector(".cs-scroll");
+  let busy = false;
+
+  const place = (r) => Object.assign(shell.style, rectFrame(r));
+
+  const lockScroll = function (lock) {
+    const gap = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = lock && gap ? `${gap}px` : "";
+    document.documentElement.classList.toggle("has-modal", lock);
+  };
+
+  const open = async function () {
+    if (busy || dialog.open) return;
+    busy = true;
+
+    card.style.setProperty("--rx", "0deg");
+    card.style.setProperty("--ry", "0deg");
+    const from = card.getBoundingClientRect();
+
+    const copy = card.cloneNode(true);
+    copy.removeAttribute("style");
+    front.replaceChildren(copy);
+    front.inert = true;
+
+    lockScroll(true);
+    place(from);
+    scroller.scrollTop = 0;
+    dialog.showModal();
+    card.style.visibility = "hidden";
+    dialog.classList.add("is-open");
+
+    const to = panelRect();
+
+    if (!reduceMotion.matches) {
+      const flip = flipper.animate(
+        [
+          { transform: "rotateY(0deg)" },
+          { transform: "rotateY(90deg) translateZ(80px)" },
+          { transform: "rotateY(180deg)" },
+        ],
+        { duration: 750, easing: flipEase }
+      );
+      const grow = shell.animate([rectFrame(from), rectFrame(to)], {
+        duration: 700,
+        delay: 500,
+        easing: growEase,
+        fill: "backwards",
+      });
+      place(to);
+      await Promise.all([flip.finished, grow.finished]);
+    } else {
+      place(to);
+    }
+
+    dialog.classList.add("is-expanded");
+    dialog.querySelector(".cs-close").focus({ preventScroll: true });
+    busy = false;
+  };
+
+  const close = async function () {
+    if (busy || !dialog.open) return;
+    busy = true;
+
+    dialog.classList.remove("is-expanded");
+
+    // A pointer move queued as the panel opened can re-tilt the hidden card;
+    // flatten it so the copy lands squarely on it
+    card.style.setProperty("--rx", "0deg");
+    card.style.setProperty("--ry", "0deg");
+
+    if (!reduceMotion.matches) {
+      await wait(250);
+      const from = shell.getBoundingClientRect();
+      const to = card.getBoundingClientRect();
+      const shrink = shell.animate([rectFrame(from), rectFrame(to)], {
+        duration: 600,
+        easing: flipEase,
+      });
+      const flip = flipper.animate(
+        [
+          { transform: "rotateY(180deg)" },
+          { transform: "rotateY(90deg) translateZ(80px)" },
+          { transform: "rotateY(0deg)" },
+        ],
+        { duration: 750, delay: 400, easing: flipEase, fill: "forwards" }
+      );
+      place(to);
+      setTimeout(() => dialog.classList.remove("is-open"), 400);
+      await Promise.all([shrink.finished, flip.finished]);
+      flip.cancel();
+    }
+
+    // Land in the copy's lit look, then let the tint fade back in
+    card.classList.add("is-landing");
+    card.style.visibility = "";
+    dialog.classList.remove("is-open");
+    dialog.close();
+    lockScroll(false);
+    trigger.focus({ preventScroll: true });
+    setTimeout(() => card.classList.remove("is-landing"), 150);
+    busy = false;
+  };
+
+  trigger.addEventListener("click", open);
+  dialog.querySelectorAll(".cs-close, .cs-close-text").forEach((btn) => {
+    btn.addEventListener("click", close);
+  });
+
+  // Escape and clicks outside the panel close it with the same animation
+  dialog.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    close();
+  });
+  dialog.addEventListener("click", (e) => {
+    if (e.target === dialog) close();
+  });
+
+  window.addEventListener("resize", () => {
+    if (dialog.open && !busy) place(panelRect());
+  });
+});
+
 // Hero grid: now and then a pulse of current runs along a row of dots,
 // sometimes jogging up or down a cell or two once before carrying on
 

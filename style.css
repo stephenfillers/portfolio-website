@@ -758,7 +758,7 @@ button {
 }
 
 .project-card:hover .project-frame::after,
-.project-card:focus-within .project-frame::after {
+.project-card:has(:focus-visible) .project-frame::after {
   opacity: 0;
 }
 
@@ -773,7 +773,7 @@ button {
 }
 
 .project-card:hover .project-media img,
-.project-card:focus-within .project-media img {
+.project-card:has(:focus-visible) .project-media img {
   filter: none;
 }
 
@@ -846,6 +846,353 @@ button {
   text-transform: uppercase;
   color: var(--subtle);
   margin-bottom: 0.6rem;
+}
+
+/* ---------- Case study ---------- */
+
+/* A full-screen modal layer: the shell inside it starts on top of the card,
+   flips over, then grows to the panel's size. script.js drives the motion */
+.case-study {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* The dim layer is the dialog's own background: ::backdrop doesn't fade
+   reliably. Closing fades it over the flip back, so it clears as the card lands */
+.case-study::backdrop {
+  background: transparent;
+}
+
+.case-study {
+  background-color: rgba(5, 5, 6, 0);
+  backdrop-filter: blur(0);
+  transition: background-color 0.75s var(--ease), backdrop-filter 0.75s var(--ease);
+}
+
+.case-study.is-open {
+  background-color: rgba(5, 5, 6, 0.78);
+  backdrop-filter: blur(6px);
+  transition-duration: 0.5s;
+}
+
+.cs-shell {
+  position: absolute;
+  perspective: 2400px;
+}
+
+.cs-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+}
+
+.cs-face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* The front is a copy of the card, held in its hover look */
+.cs-front .project-card {
+  height: 100%;
+  border-color: var(--border-strong);
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+}
+
+.cs-front .project-frame::after {
+  opacity: 0;
+}
+
+.cs-front .project-media img {
+  filter: none;
+}
+
+.cs-back {
+  overflow: hidden;
+  transform: rotateY(180deg);
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(90% 60% at 0% 0%, rgba(var(--accent-rgb), 0.14), transparent 60%),
+    var(--surface);
+  box-shadow: 0 40px 120px -40px rgba(0, 0, 0, 0.9);
+}
+
+/* Title card shown while the panel flips and grows, before the text fits */
+.cs-cover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  transition: opacity 0.35s var(--ease);
+}
+
+.cs-cover .project-meta {
+  color: var(--accent);
+}
+
+.cs-cover-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cs-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  visibility: hidden;
+  /* Stays visible while the text fades out on close */
+  transition: visibility 0s 0.3s;
+}
+
+.case-study.is-expanded .cs-cover {
+  opacity: 0;
+}
+
+.case-study.is-expanded .cs-scroll {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.cs-content {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 4.5rem) clamp(1.25rem, 5vw, 3rem) clamp(2rem, 5vw, 3rem);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.case-study.is-expanded .cs-content {
+  opacity: 1;
+  transform: none;
+  transition-duration: 0.6s;
+}
+
+.cs-close {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 1;
+  float: right;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.75rem 0.75rem -3.25rem 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface-2);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.cs-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cs-close svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.cs-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.cs-lede {
+  font-size: 1.125rem;
+  color: var(--muted);
+}
+
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin: 2.25rem 0 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--border);
+  overflow: hidden;
+}
+
+.cs-facts div {
+  padding: 1rem 1.1rem;
+  background: var(--surface-2);
+}
+
+.cs-facts dt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+.cs-facts dd {
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.cs-section {
+  margin-top: 2.75rem;
+}
+
+.cs-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.cs-section h3::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.cs-section p {
+  color: var(--muted);
+}
+
+.cs-section > * + * {
+  margin-top: 1rem;
+}
+
+.cs-section code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 0.3rem;
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.cs-list {
+  display: grid;
+  gap: 0.6rem;
+  color: var(--muted);
+}
+
+.cs-list li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.cs-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.1rem;
+  top: 0.7em;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.cs-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.cs-features div {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.cs-features h4 {
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.cs-features p {
+  font-size: 0.95rem;
+}
+
+.cs-timeline {
+  display: grid;
+  border-left: 1px solid var(--border-strong);
+  margin-left: 0.3rem;
+}
+
+.cs-timeline li {
+  position: relative;
+  padding: 0 0 1rem 1.4rem;
+  color: var(--muted);
+}
+
+.cs-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -0.3rem;
+  top: 0.55em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+}
+
+.cs-timeline .mono {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.cs-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+html.has-modal {
+  overflow: hidden;
+}
+
+/* The card takes over from the flipping copy in the same lit look, then
+   fades back to its resting tint once the class comes off */
+.project-card.is-landing .project-frame::after {
+  opacity: 0;
+  transition: none;
+}
+
+.project-card.is-landing .project-media img {
+  filter: none;
+  transition: none;
 }
 
 /* ---------- Skills ---------- */
@@ -1294,6 +1641,17 @@ svg.fill {
 
   .skill-groups,
   .project-grid--compact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .cs-facts,
+  .cs-features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cs-features {
     grid-template-columns: 1fr;
   }
 }
