@@ -6,5 +6,8 @@
   "assets": {
     "directory": "./",
     "not_found_handling": "404-page"
-  }
+  },
+  // Required by `wrangler preview`, which Workers Builds runs for pull requests.
+  // Docs: https://developers.cloudflare.com/workers/previews/configuration/
+  "previews": {}
 }
