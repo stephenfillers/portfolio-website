@@ -150,6 +150,164 @@ if (finePointer.matches) {
   });
 }
 
+// Hero grid: now and then a pulse of current runs along a row of dots,
+// sometimes jogging up or down a cell or two once before carrying on
+
+const gridTrace = document.querySelector(".grid-trace");
+
+const runGridTraces = function (canvas) {
+  const ctx = canvas.getContext("2d");
+  const cell = 28; // matches .grid-dots background-size; dots sit mid-cell
+  const speed = 400; // px per second
+  const tailLength = 120;
+  const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent-rgb").trim();
+
+  let width = 0;
+  let height = 0;
+  let traces = [];
+  let nextSpawn = 1.2;
+  let visible = true;
+  let frame = null;
+  let last = 0;
+
+  const resize = function () {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  const randInt = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
+  const dot = (i, j) => ({ x: cell / 2 + i * cell, y: cell / 2 + j * cell });
+
+  // Horizontal runs in one direction, with at most one short vertical jog
+  const makeTrace = function () {
+    const cols = Math.floor(width / cell);
+    const rows = Math.floor(height / cell);
+    const dir = Math.random() < 0.5 ? -1 : 1;
+    let i = randInt(Math.floor(cols * 0.1), Math.floor(cols * 0.9));
+    let j = randInt(Math.floor(rows * 0.15), Math.floor(rows * 0.6));
+    let remaining = Math.min(randInt(16, 30), dir > 0 ? cols - 1 - i : i);
+    const points = [dot(i, j)];
+    let jogged = Math.random() < 0.3;
+
+    while (remaining > 0) {
+      const run = Math.min(randInt(4, 9), remaining);
+      i += run * dir;
+      remaining -= run;
+      points.push(dot(i, j));
+
+      if (!jogged && remaining > 2) {
+        jogged = true;
+        const jog = randInt(1, 2) * (Math.random() < 0.5 ? -1 : 1);
+        const next = Math.min(Math.max(j + jog, 1), rows - 2);
+        if (next !== j) points.push(dot(i, (j = next)));
+      }
+    }
+
+    const offsets = [0];
+    for (let k = 1; k < points.length; k++) {
+      const a = points[k - 1];
+      const b = points[k];
+      offsets.push(offsets[k - 1] + Math.abs(b.x - a.x) + Math.abs(b.y - a.y));
+    }
+    return { points, offsets, dir, length: offsets[offsets.length - 1], dist: 0 };
+  };
+
+  const pointAt = function (trace, d) {
+    const { points, offsets } = trace;
+    let k = 1;
+    while (k < points.length - 1 && offsets[k] < d) k++;
+    const a = points[k - 1];
+    const b = points[k];
+    const t = (d - offsets[k - 1]) / (offsets[k] - offsets[k - 1] || 1);
+    return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+  };
+
+  const drawTrace = function (trace) {
+    const head = Math.min(trace.dist, trace.length);
+    const tail = Math.max(head - tailLength, 0);
+    if (head <= tail) return;
+
+    const start = pointAt(trace, tail);
+    const end = pointAt(trace, head);
+
+    // Ease in over the first few cells, stay bright for most of the run,
+    // then dim through the last stretch so it dies out while still moving
+    const fadeIn = Math.min(head / (cell * 3), 1);
+    const fadeOut = Math.min((trace.length - head) / (trace.length * 0.3), 1);
+    const alpha = 0.6 * fadeIn * fadeOut ** 1.5;
+
+    // Runs are mostly horizontal, so a left-to-right gradient covers the tail
+    const gradientEnd = end.x === start.x ? end.x + trace.dir : end.x;
+    const gradient = ctx.createLinearGradient(start.x, 0, gradientEnd, 0);
+    gradient.addColorStop(0, `rgba(${accent}, 0)`);
+    gradient.addColorStop(1, `rgba(${accent}, ${alpha.toFixed(3)})`);
+
+    ctx.lineWidth = 1.25;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.shadowColor = `rgba(${accent}, 0.7)`;
+    ctx.shadowBlur = 6;
+    ctx.strokeStyle = gradient;
+    ctx.beginPath();
+    ctx.moveTo(start.x, start.y);
+    trace.offsets.forEach((offset, k) => {
+      if (offset > tail && offset < head) ctx.lineTo(trace.points[k].x, trace.points[k].y);
+    });
+    ctx.lineTo(end.x, end.y);
+    ctx.stroke();
+  };
+
+  const tick = function (now) {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+
+    nextSpawn -= dt;
+    if (nextSpawn <= 0) {
+      const trace = traces.length < 2 && width > cell * 6 ? makeTrace() : null;
+      if (trace?.length) traces.push(trace);
+      nextSpawn = 2 + Math.random() * 3.5;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+    traces.forEach((trace) => {
+      trace.dist += speed * dt;
+      drawTrace(trace);
+    });
+    traces = traces.filter((trace) => trace.dist < trace.length);
+
+    frame = requestAnimationFrame(tick);
+  };
+
+  const start = function () {
+    if (frame || !visible || document.hidden) return;
+    last = performance.now();
+    frame = requestAnimationFrame(tick);
+  };
+
+  const stop = function () {
+    cancelAnimationFrame(frame);
+    frame = null;
+  };
+
+  new ResizeObserver(resize).observe(canvas);
+  resize();
+
+  // Only animate while the hero is on screen and the tab is in front
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    visible ? start() : stop();
+  }).observe(canvas);
+
+  document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+  start();
+};
+
+if (gridTrace && !reduceMotion.matches) runGridTraces(gridTrace);
+
 // Resume timeline: fill the line as it scrolls past the middle of the screen
 
 const timeline = document.querySelector("#timeline");
