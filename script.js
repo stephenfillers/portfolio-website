@@ -110,9 +110,8 @@ const rotateWords = async function () {
 
 if (!reduceMotion.matches && !useGsap) rotateWords();
 
-// Pointer effects: hero spotlight and project card tilt
+// Pointer effects: project card tilt
 
-const hero = document.querySelector(".hero");
 const projectCards = document.querySelectorAll(".project-card");
 
 const trackPointer = function (el, onMove) {
@@ -133,8 +132,6 @@ const trackPointer = function (el, onMove) {
 };
 
 if (finePointer.matches) {
-  trackPointer(hero);
-
   projectCards.forEach((card) => {
     const maxTilt = 4;
 

@@ -410,6 +410,41 @@ button {
   pointer-events: none;
 }
 
+/* Ambient light behind the grid: a warm source above the headline and a
+   fainter bounce lower right, drifting and breathing slowly so the space
+   feels deep */
+.hero-glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(
+      ellipse 45% 35% at 35% 30%,
+      color-mix(in srgb, var(--glow) 10%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 35% 30% at 75% 70%,
+      color-mix(in srgb, var(--glow) 4%, transparent),
+      transparent 70%
+    );
+  filter: blur(40px);
+  animation:
+    glow-drift 24s ease-in-out infinite alternate,
+    glow-pulse 7s ease-in-out infinite alternate;
+}
+
+@keyframes glow-drift {
+  to {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+  }
+}
+
+@keyframes glow-pulse {
+  to {
+    opacity: 0.55;
+  }
+}
+
 .grid-dots {
   position: absolute;
   inset: 0;
@@ -430,22 +465,6 @@ button {
   height: 100%;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
-}
-
-.spotlight {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.5s;
-  background: radial-gradient(
-    500px circle at var(--mx, 50%) var(--my, 40%),
-    rgba(var(--accent-rgb), 0.09),
-    transparent 60%
-  );
-}
-
-.hero:hover .spotlight {
-  opacity: 1;
 }
 
 .eyebrow {
@@ -1197,18 +1216,20 @@ html.has-modal {
 
 /* ---------- Skills ---------- */
 
+/* Spec-sheet rows: the label on the left, the tools flowing on the right,
+   so a short row just ends early */
 .skill-groups {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .skill-group {
   --brick: var(--accent);
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  gap: 0.75rem 2rem;
+  align-items: baseline;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
 }
 
 .skill-group h3 {
@@ -1221,14 +1242,6 @@ html.has-modal {
   color: var(--subtle);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 1rem;
-}
-
-.skill-group h3::before {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  background: var(--brick);
 }
 
 .chips {
@@ -1237,11 +1250,17 @@ html.has-modal {
   gap: 0.5rem;
 }
 
-/* Arcade bricks: notched pixel corners, a lit top edge in the row's color
-   and a shaded bottom edge */
+/* Arcade bricks: a lit top edge in the row's color and a shaded bottom edge */
+.skill-group h3::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--brick);
+}
+
 .chips li {
-  --notch: 4px;
   padding: 0.8rem 1rem 0.75rem;
+  border-radius: 3px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 500;
@@ -1253,13 +1272,6 @@ html.has-modal {
     inset 0 3px 0 var(--brick),
     inset 0 0 0 2px var(--border-strong),
     inset 0 -4px 0 rgba(0, 0, 0, 0.4);
-  clip-path: polygon(
-    0 var(--notch), var(--notch) var(--notch), var(--notch) 0,
-    calc(100% - var(--notch)) 0, calc(100% - var(--notch)) var(--notch), 100% var(--notch),
-    100% calc(100% - var(--notch)), calc(100% - var(--notch)) calc(100% - var(--notch)),
-    calc(100% - var(--notch)) 100%, var(--notch) 100%,
-    var(--notch) calc(100% - var(--notch)), 0 calc(100% - var(--notch))
-  );
   transition: transform 0.12s steps(2), background-color 0.12s;
 }
 
@@ -1272,7 +1284,8 @@ html.has-modal {
     inset 0 -4px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* Easter egg (egg.js): the start button, shot chips and the game layer */
+/* Easter egg (egg.js): the start button, the marching rows, shot chips and
+   the game layer */
 .skills-head {
   display: flex;
   flex-wrap: wrap;
@@ -1301,18 +1314,30 @@ html.has-modal {
   border-color: var(--accent);
 }
 
-.play-btn svg {
-  animation: bob 1.6s ease-in-out infinite;
+/* A pixel invader that shuffles side to side in two-frame steps */
+.play-btn .invader {
+  width: 1.1em;
+  height: 0.8em;
+  fill: currentColor;
+  stroke: none;
+  shape-rendering: crispEdges;
+  animation: shuffle 1.2s steps(1) infinite;
 }
 
-.play-btn:hover svg {
+.play-btn:hover .invader {
   transform: none;
 }
 
-@keyframes bob {
+@keyframes shuffle {
   50% {
-    translate: 0 -3px;
+    translate: 2px 0;
   }
+}
+
+/* During the game egg.js steps the rows side to side and down, like an
+   invader formation */
+.is-playing .chips {
+  transform: translate(var(--march-x, 0), var(--march-y, 0));
 }
 
 /* The game needs a keyboard */
@@ -1639,13 +1664,16 @@ svg.fill {
     inset: var(--inset);
   }
 
-  .skill-groups,
   .project-grid--compact {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 640px) {
+  .skill-group {
+    grid-template-columns: 1fr;
+  }
+
   .cs-facts,
   .cs-features {
     grid-template-columns: 1fr 1fr;
