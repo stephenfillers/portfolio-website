@@ -1,7 +1,7 @@
 // Cloudflare Workers config: serves this repo's static files with no server code.
 // Docs: https://developers.cloudflare.com/workers/static-assets/
 {
-  "name": "portfolio-website",
+  "name": "portfolio",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./",
