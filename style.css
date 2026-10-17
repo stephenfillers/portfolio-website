@@ -410,6 +410,41 @@ button {
   pointer-events: none;
 }
 
+/* Ambient light behind the grid: a warm source above the headline and a
+   fainter bounce lower right, drifting and breathing slowly so the space
+   feels deep */
+.hero-glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(
+      ellipse 45% 35% at 35% 30%,
+      color-mix(in srgb, var(--glow) 10%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 35% 30% at 75% 70%,
+      color-mix(in srgb, var(--glow) 4%, transparent),
+      transparent 70%
+    );
+  filter: blur(40px);
+  animation:
+    glow-drift 24s ease-in-out infinite alternate,
+    glow-pulse 7s ease-in-out infinite alternate;
+}
+
+@keyframes glow-drift {
+  to {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+  }
+}
+
+@keyframes glow-pulse {
+  to {
+    opacity: 0.55;
+  }
+}
+
 .grid-dots {
   position: absolute;
   inset: 0;
@@ -430,22 +465,6 @@ button {
   height: 100%;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
-}
-
-.spotlight {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.5s;
-  background: radial-gradient(
-    500px circle at var(--mx, 50%) var(--my, 40%),
-    rgba(var(--accent-rgb), 0.09),
-    transparent 60%
-  );
-}
-
-.hero:hover .spotlight {
-  opacity: 1;
 }
 
 .eyebrow {
