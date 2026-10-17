@@ -678,9 +678,9 @@ button {
   border-radius: inherit;
   padding: 1px;
   background: radial-gradient(
-    400px circle at var(--mx, 50%) var(--my, 50%),
-    var(--accent),
-    transparent 45%
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(var(--accent-rgb), 0.6),
+    transparent 40%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -695,10 +695,11 @@ button {
 }
 
 .project-card:hover {
-  box-shadow: 0 30px 80px -30px color-mix(in srgb, var(--glow) 55%, transparent);
+  border-color: var(--border-strong);
+  box-shadow: 0 24px 60px -36px color-mix(in srgb, var(--glow) 30%, transparent);
 }
 
-/* Screenshot sits in an inset window that bleeds off the bottom-right,
+/* Screenshot sits in an inset window that bleeds off the bottom edge,
    on a dark panel lit by a faint ember glow from the top-left corner */
 .project-media {
   --inset: clamp(1.5rem, 3.5vw, 2.75rem);
@@ -711,30 +712,68 @@ button {
 }
 
 .project-frame {
+  --bar: 1.6rem;
   position: absolute;
-  inset: var(--inset) 0 0 var(--inset);
+  /* Sized by the screenshot: it bleeds off the bottom when it's taller than
+     the panel, and shows whole when a tall card leaves room below it */
+  inset: var(--inset) var(--inset) auto;
+  display: grid;
+  grid-template-rows: var(--bar) auto;
   overflow: hidden;
   border: 1px solid var(--border-strong);
-  border-right: 0;
-  border-bottom: 0;
-  border-radius: 10px 0 0 0;
+  border-radius: 10px;
+  background: var(--bg);
   /* Safari drops the rounded clip once GSAP puts the image on its own layer;
      a stacking context keeps the corner clipped without cutting the shadow */
   isolation: isolate;
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
 }
 
-.project-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top left;
-  filter: saturate(0.75);
-  transition: transform 0.8s var(--ease), filter 0.6s var(--ease);
+/* Browser toolbar so the screenshot reads as a window, not a loose crop */
+.project-frame::before {
+  content: "";
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(circle, var(--border-strong) 3.5px, transparent 4px) 0.55rem 50% / 14px 14px no-repeat,
+    radial-gradient(circle, var(--border-strong) 3.5px, transparent 4px) 1.35rem 50% / 14px 14px no-repeat,
+    radial-gradient(circle, var(--border-strong) 3.5px, transparent 4px) 2.15rem 50% / 14px 14px no-repeat,
+    var(--surface-2);
 }
 
-.project-card:hover .project-media img {
-  transform: scale(1.04);
+/* Until hover the screenshot is a dim charcoal print lit by the same ember
+   glow as the panel, so its own palette doesn't clash with the site's */
+.project-frame::after {
+  content: "";
+  position: absolute;
+  inset: var(--bar) 0 0 0;
+  z-index: 1;
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(var(--accent-rgb), 0.38), transparent 65%),
+    linear-gradient(to top, rgba(10, 10, 11, 0.5), transparent 50%);
+  mix-blend-mode: screen;
+  transition: opacity 0.6s var(--ease);
+  pointer-events: none;
+}
+
+.project-card:hover .project-frame::after,
+.project-card:focus-within .project-frame::after {
+  opacity: 0;
+}
+
+/* Full page width pinned under the toolbar, the way a browser shows the
+   top of a page */
+.project-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) brightness(0.5) contrast(1.15);
+  transition: filter 0.6s var(--ease);
+}
+
+.project-card:hover .project-media img,
+.project-card:focus-within .project-media img {
   filter: none;
 }
 
@@ -1251,8 +1290,6 @@ svg.fill {
      bleeding off the card's edge */
   .project-frame {
     inset: var(--inset);
-    border: 1px solid var(--border-strong);
-    border-radius: 10px;
   }
 
   .skill-groups,
