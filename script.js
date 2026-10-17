@@ -1,6 +1,10 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
+// motion.js takes over reveals, the rotator and the timeline when GSAP loaded
+const useGsap = !reduceMotion.matches && "gsap" in window;
+document.documentElement.classList.toggle("gsap", useGsap);
+
 // Nav: border/blur once the page scrolls, mobile menu toggle
 
 const siteNav = document.querySelector("#site-nav");
@@ -69,9 +73,11 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
 );
 
-document.querySelectorAll(".reveal").forEach((el) => {
-  revealObserver.observe(el);
-});
+if (!useGsap) {
+  document.querySelectorAll(".reveal").forEach((el) => {
+    revealObserver.observe(el);
+  });
+}
 
 // Hero: rotating, typed word
 
@@ -101,7 +107,7 @@ const rotateWords = async function () {
   }
 };
 
-if (!reduceMotion.matches) rotateWords();
+if (!reduceMotion.matches && !useGsap) rotateWords();
 
 // Pointer effects: hero spotlight and project card tilt
 
@@ -169,7 +175,7 @@ const onScroll = function () {
   if (scrollFrame) return;
   scrollFrame = requestAnimationFrame(() => {
     updateNavState();
-    updateTimeline();
+    if (!useGsap) updateTimeline();
     scrollFrame = null;
   });
 };
