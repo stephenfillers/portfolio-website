@@ -2,177 +2,338 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stephen Fillers - Software Developer</title>
+    <title>Stephen Fillers · Software Developer</title>
+    <meta
+      name="description"
+      content="Stephen Fillers is a designer-turned-software-developer building user-focused products end to end."
+    />
+    <meta name="theme-color" content="#0a0a0b" />
+    <meta property="og:title" content="Stephen Fillers · Software Developer" />
+    <meta
+      property="og:description"
+      content="Designer and marketer turned software developer, building user-focused products end to end."
+    />
+    <meta property="og:type" content="website" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0b'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%23a371ff'%3ESF%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
     <link rel="stylesheet" href="style.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
     <script defer src="script.js"></script>
   </head>
   <body>
-    <main class="grid-container">
-      <div class="side-nav">
-        <aside class="nav-items-container">
-          <a href="#about" class="nav-item active-nav-item">About</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-nav" id="site-nav">
+      <div class="container nav-inner">
+        <a href="#top" class="logo" aria-label="Stephen Fillers, back to top">
+          <span class="logo-mark">SF</span>
+          <span class="logo-text">Stephen Fillers</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Toggle navigation"
+        >
+          <span></span><span></span>
+        </button>
+
+        <nav class="nav-menu" id="nav-menu" aria-label="Primary">
+          <a href="#about" class="nav-item">About</a>
           <a href="#projects" class="nav-item">Projects</a>
           <a href="#skills" class="nav-item">Skills</a>
           <a href="#resume" class="nav-item">Resume</a>
-          <a href="#contact" class="nav-item">Contact</a>
-        </aside>
+          <a href="#contact" class="btn btn-primary btn-sm">Get in touch</a>
+        </nav>
       </div>
-      <div class="main-content">
-        <header id="about" class="section">
-          <div class="header-content">
-            <h1>
-              Hi, I’m Stephen! 👋🏼 I’m a
-              marketing-director-turned-software-developer with a passion for
-              technology and design.
-            </h1>
-            <h2>About</h2>
+    </header>
 
-            <p>
-              What began as a career in graphic design soon shifted into a
-              director-level marketing role. My passion, however, was driving me
-              to something different. After a few months of long nights teaching
-              myself to code, I officially transitioned into the world of
-              professional software development.
+    <main id="main">
+      <section id="top" class="section hero">
+        <div class="hero-bg" aria-hidden="true">
+          <div class="grid-dots"></div>
+          <div class="blob blob-purple"></div>
+          <div class="blob blob-accent"></div>
+          <div class="spotlight"></div>
+        </div>
+
+        <div class="container hero-inner">
+          <p class="eyebrow reveal">
+            <span class="status-dot"></span> Software Developer · Designer
+          </p>
+          <h1 class="hero-title reveal" style="--i: 1">
+            Hi, I’m Stephen.<br />
+            I build at the intersection of
+            <span class="rotator" aria-hidden="true"
+              ><span class="rotator-word">code</span
+              ><span class="caret"></span></span
+            ><span class="sr-only">design, code and marketing</span>.
+          </h1>
+          <p class="hero-lead reveal" style="--i: 2">
+            A marketing director turned software developer with a passion for
+            technology and design.
+          </p>
+          <div class="hero-actions reveal" style="--i: 3">
+            <a href="#projects" class="btn btn-primary">
+              View projects
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn-ghost">Contact me</a>
+          </div>
+        </div>
+
+        <a href="#about" class="scroll-cue" aria-label="Scroll to about">
+          <span></span>
+        </a>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container about-grid">
+          <div>
+            <p class="section-label reveal">01 / About</p>
+            <h2 class="section-title reveal" style="--i: 1">
+              From pixels and campaigns to production code.
+            </h2>
+            <p class="reveal" style="--i: 2">
+              My career started in graphic design and grew into a
+              director-level marketing role. My passion, though, kept pulling
+              me toward something different. After months of late nights
+              teaching myself to code, I made the move into professional
+              software development.
             </p>
-
-            <p>
-              As a designer/marketer-turned-developer, I’m uniquely positioned
-              to build unique, user-focused products end-to-end while also
-              helping to bridge any communication gaps between marketing and
-              technical teams. Nice to meet you!
+            <p class="reveal" style="--i: 3">
+              With a background in design and marketing, I build
+              user-focused products end to end and help bridge the
+              communication gap between marketing and technical teams. Nice to
+              meet you!
             </p>
           </div>
-        </header>
+          <dl class="stats">
+            <div class="stat reveal" style="--i: 1">
+              <dt>Years in design &amp; marketing</dt>
+              <dd>9<span>+</span></dd>
+            </div>
+            <div class="stat reveal" style="--i: 2">
+              <dt>Writing code professionally since</dt>
+              <dd>2021</dd>
+            </div>
+            <div class="stat reveal" style="--i: 3">
+              <dt>Degree</dt>
+              <dd class="stat-text">B.S. Digital Media</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
 
-        <section id="projects" class="section">
-          <div>
-            <h2>Projects</h2>
-            <div class="project-cards">
-              <div class="card-column">
-                <div class="project-card">
-                  <div class="project-card__details">
-                    <p class="project-card__title">Caser</p>
-                    <div class="project-card__tags">
-                      <span>JavaScript</span>
-                      <span>HTML</span>
-                      <span>CSS</span>
-                    </div>
-                    <div class="project-card__actions">
-                      <a
-                        href="https://main.d2knjhecnob9up.amplifyapp.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >Demo</a
-                      >
-                      <a
-                        href="https://github.com/stephenfillers/caser"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >Source</a
-                      >
-                    </div>
-                  </div>
+      <section id="projects" class="section">
+        <div class="container">
+          <p class="section-label reveal">02 / Projects</p>
+          <h2 class="section-title reveal" style="--i: 1">Selected work</h2>
+
+          <div class="project-grid">
+            <article class="project-card reveal" style="--i: 2">
+              <div class="project-media">
+                <img
+                  src="assets/caser-dark.png"
+                  alt="Screenshot of the Caser app in dark mode"
+                  loading="lazy"
+                  width="1117"
+                  height="889"
+                />
+              </div>
+              <div class="project-body">
+                <div class="project-head">
+                  <h3 class="project-title">Caser</h3>
+                  <p class="project-desc">
+                    A quick, friendly tool that converts any text to title
+                    case, uppercase, lowercase and more, with light and dark
+                    themes.
+                  </p>
+                  <ul class="tags">
+                    <li>JavaScript</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                  </ul>
+                </div>
+                <div class="project-actions">
+                  <a
+                    class="btn btn-primary btn-sm"
+                    href="https://main.d2knjhecnob9up.amplifyapp.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Live demo
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                  </a>
+                  <a
+                    class="btn btn-ghost btn-sm"
+                    href="https://github.com/stephenfillers/caser"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Source</a
+                  >
                 </div>
               </div>
-            </div>
+            </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="skills" class="section">
-          <div class="container">
-            <div class="skills-content">
-              <h2>Skills</h2>
-              <div class="skills-items">
-                <div class="skills-item">JavaScript</div>
-                <div class="skills-item">TypeScript</div>
-                <div class="skills-item">Angular</div>
-                <div class="skills-item">HTML</div>
-                <div class="skills-item">CSS</div>
-                <div class="skills-item">AWS</div>
-                <div class="skills-item">Git</div>
-                <div class="skills-item">Python</div>
-                <div class="skills-item">Node</div>
-                <div class="skills-item">Figma</div>
-                <div class="skills-item">Adobe CC</div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <section id="skills" class="section">
+        <div class="container">
+          <p class="section-label reveal">03 / Skills</p>
+          <h2 class="section-title reveal" style="--i: 1">
+            Tools I work with
+          </h2>
 
-        <section id="resume" class="section">
-          <div>
-            <h2>Resume</h2>
-            <h3>Work experience</h3>
-            <div class="resume-row">
-              <p class="resume-date">11/2021 - Current</p>
-              <div class="resume-details">
-                <p class="resume-title">Software Developer, DLZP Group</p>
-                <p class="resume-stats">Full-time / Fully remote</p>
-              </div>
+          <div class="skill-groups">
+            <div class="skill-group reveal" style="--i: 2">
+              <h3>Languages</h3>
+              <ul class="chips">
+                <li>JavaScript</li>
+                <li>TypeScript</li>
+                <li>Python</li>
+                <li>HTML</li>
+                <li>CSS</li>
+              </ul>
             </div>
-            <div class="resume-row">
-              <p class="resume-date">05/2019 – 11/2021</p>
-              <div class="resume-details">
-                <p class="resume-title">
-                  Director of Digital Media Marketing, King University
-                </p>
-                <p class="resume-stats">Full-time / Bristol, TN</p>
-              </div>
+            <div class="skill-group reveal" style="--i: 3">
+              <h3>Frameworks &amp; platforms</h3>
+              <ul class="chips">
+                <li>Angular</li>
+                <li>Node</li>
+                <li>AWS</li>
+                <li>Git</li>
+              </ul>
             </div>
-            <div class="resume-row">
-              <p class="resume-date">06/2012 – 05/2019</p>
-              <div class="resume-details">
-                <p class="resume-title">
-                  Visual Design and Development Manager, AAM USA, Inc.
-                </p>
-                <p class="resume-stats">Full-time / Piney Flats, TN</p>
-              </div>
-            </div>
-            <h3>Education</h3>
-            <div class="resume-row">
-              <p class="resume-date">2009 – 2013</p>
-              <div class="resume-details">
-                <p class="resume-title">East Tennesee State University</p>
-                <p class="resume-stats">
-                  B.S. in Digital Media / Johnson City, TN
-                </p>
-              </div>
+            <div class="skill-group reveal" style="--i: 4">
+              <h3>Design</h3>
+              <ul class="chips">
+                <li>Figma</li>
+                <li>Adobe CC</li>
+              </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="contact" class="section">
-          <div>
-            <h2>Contact</h2>
-            <ul class="contact-list">
-              <li>
-                📪
-                <a href="mailto:hello@stephenfillers.com">Email me</a>
-              </li>
-              <li>
-                🤝
-                <a
-                  href="https://www.linkedin.com/in/stephenfillers/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Connect on LinkedIn</a
-                >
-              </li>
-              <li>
-                👨🏼‍💻
-                <a
-                  href="https://github.com/stephenfillers"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >View my GitHub</a
-                >
-              </li>
-            </ul>
+      <section id="resume" class="section">
+        <div class="container">
+          <p class="section-label reveal">04 / Resume</p>
+          <h2 class="section-title reveal" style="--i: 1">Experience</h2>
+
+          <ol class="timeline" id="timeline">
+            <li class="timeline-item reveal">
+              <p class="timeline-date">Nov 2021 – Present</p>
+              <h3>Software Developer</h3>
+              <p class="timeline-org">DLZP Group</p>
+              <p class="timeline-meta">Full-time · Remote</p>
+            </li>
+            <li class="timeline-item reveal">
+              <p class="timeline-date">May 2019 – Nov 2021</p>
+              <h3>Director of Digital Media Marketing</h3>
+              <p class="timeline-org">King University</p>
+              <p class="timeline-meta">Full-time · Bristol, TN</p>
+            </li>
+            <li class="timeline-item reveal">
+              <p class="timeline-date">Jun 2012 – May 2019</p>
+              <h3>Visual Design and Development Manager</h3>
+              <p class="timeline-org">AAM USA, Inc.</p>
+              <p class="timeline-meta">Full-time · Piney Flats, TN</p>
+            </li>
+            <li class="timeline-item timeline-edu reveal">
+              <p class="timeline-date">2009 – 2013</p>
+              <h3>B.S. in Digital Media</h3>
+              <p class="timeline-org">East Tennessee State University</p>
+              <p class="timeline-meta">Education · Johnson City, TN</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="contact-card reveal">
+            <p class="section-label">05 / Contact</p>
+            <h2 class="contact-title">Let’s build something together.</h2>
+            <p class="contact-lead">
+              Have a project, a role, or just want to say hello? My inbox is
+              open.
+            </p>
+            <div class="contact-actions">
+              <a
+                class="btn btn-primary btn-lg"
+                href="mailto:hello@stephenfillers.com"
+                >hello@stephenfillers.com</a
+              >
+              <button
+                class="btn btn-ghost btn-icon"
+                id="copy-email"
+                data-email="hello@stephenfillers.com"
+                aria-label="Copy email address"
+                title="Copy email address"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="9" y="9" width="11" height="11" rx="2" />
+                  <path d="M5 15V6a2 2 0 0 1 2-2h9" />
+                </svg>
+              </button>
+            </div>
+            <div class="socials">
+              <a
+                href="https://www.linkedin.com/in/stephenfillers/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="fill">
+                  <path
+                    d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/stephenfillers"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="fill">
+                  <path
+                    d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .3"
+                  />
+                </svg>
+                GitHub
+              </a>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year">2026</span> Stephen Fillers</p>
+        <p class="mono">Built with HTML, CSS &amp; JavaScript</p>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </body>
 </html>
