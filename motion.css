@@ -1,0 +1,48 @@
+/* ---------- Hero title lines (masked for the intro) ---------- */
+
+.hero-title .line {
+  display: block;
+  overflow: clip;
+  /* Room for descenders inside the mask */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.hero-title .line-inner {
+  display: block;
+}
+
+/* ---------- GSAP hand-off ---------- */
+
+/* GSAP drives reveals; the CSS transitions come back once it's done */
+.gsap .reveal:not(.is-visible) {
+  transition: none;
+}
+
+.gsap .section-label {
+  min-height: 1lh;
+}
+
+.gsap .caret {
+  display: none;
+}
+
+.gsap .rotator-word {
+  display: inline-block;
+  white-space: nowrap;
+  perspective: 600px;
+}
+
+.rotator-char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+}
+
+.gsap .project-media img {
+  transition: none;
+}
+
+/* Magnetic buttons: GSAP owns transform, so keep only the color transitions */
+.gsap .magnetic {
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
