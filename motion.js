@@ -5,7 +5,17 @@
 if (document.documentElement.classList.contains("gsap")) {
   gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
 
-  const onScreen = (trigger) => ({ trigger, start: "top 85%", once: true });
+  // Plays once on the way in. If the element is already scrolled past (a reload
+  // partway down, or a jump from the nav) it finishes instantly instead of
+  // animating out of sight.
+  const onScreen = (trigger, start = "top 85%") => ({
+    trigger,
+    start,
+    once: true,
+    onEnter: (self) => {
+      if (self.scroll() > self.end) self.animation.progress(1);
+    },
+  });
 
   // Reveal helpers: GSAP runs the motion, then hands the element back to the
   // CSS so hover transitions and the card tilt work as before
@@ -18,12 +28,15 @@ if (document.documentElement.classList.contains("gsap")) {
   };
 
   const handBack = function () {
-    this.targets().forEach((el) => {
+    const targets = this.targets();
+    targets.forEach((el) => {
+      el.style.transition = "none";
       el.classList.add("is-visible");
-      gsap.set(el, {
-        clearProps: "opacity,visibility,transform,transition,clipPath",
-      });
+      gsap.set(el, { clearProps: "opacity,visibility,transform,clipPath" });
     });
+    // Restore the CSS transitions a frame later, so a skipped animation
+    // doesn't replay the CSS reveal fade
+    requestAnimationFrame(() => gsap.set(targets, { clearProps: "transition" }));
   };
 
   // Hero: intro timeline
@@ -56,13 +69,18 @@ if (document.documentElement.classList.contains("gsap")) {
     )
     .from(".scroll-cue", { autoAlpha: 0, y: -10 }, 1.2);
 
-  // Hero: content drifts up and fades while the background lags behind
+  // Skip the intro when the page loads already scrolled
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.scrollY > 0) intro.progress(1);
+  });
+
+  // Hero: content drifts up while the background lags behind
 
   gsap
     .timeline({
       scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
     })
-    .to(".hero-inner", { yPercent: -25, autoAlpha: 0.1, ease: "none" }, 0)
+    .to(".hero-inner", { yPercent: -25, ease: "none" }, 0)
     .to(".hero-bg", { y: 160, ease: "none" }, 0)
     .to(".grid-dots", { scale: 1.2, ease: "none" }, 0);
 
@@ -148,16 +166,19 @@ if (document.documentElement.classList.contains("gsap")) {
 
   // About: paragraphs, stat cards slide in and the numbers count up
 
-  ScrollTrigger.batch(".about-grid p.reveal", {
-    start: "top 88%",
-    once: true,
-    onEnter: (batch) =>
-      gsap.fromTo(
-        batch,
-        { autoAlpha: 0, y: 30 },
-        { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", stagger: 0.12, onComplete: handBack }
-      ),
-  });
+  gsap.fromTo(
+    ".about-grid p.reveal:not(.section-label)",
+    { autoAlpha: 0, y: 30 },
+    {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1,
+      ease: "expo.out",
+      stagger: 0.12,
+      onComplete: handBack,
+      scrollTrigger: onScreen(".about-grid p.reveal:not(.section-label)", "top 88%"),
+    }
+  );
 
   gsap.fromTo(
     ".stat",
@@ -203,7 +224,7 @@ if (document.documentElement.classList.contains("gsap")) {
     prep(details);
 
     gsap
-      .timeline({ scrollTrigger: { trigger: card, start: "top 80%", once: true } })
+      .timeline({ scrollTrigger: onScreen(card, "top 80%") })
       .fromTo(
         card,
         { autoAlpha: 0, y: 70, transition: "none" },
@@ -280,7 +301,7 @@ if (document.documentElement.classList.contains("gsap")) {
   prep(contactRest);
 
   gsap
-    .timeline({ scrollTrigger: { trigger: contactCard, start: "top 80%", once: true } })
+    .timeline({ scrollTrigger: onScreen(contactCard, "top 80%") })
     .fromTo(
       contactCard,
       { autoAlpha: 0, y: 50, clipPath: "inset(8% 6% 8% 6% round 1.25rem)" },
@@ -298,26 +319,6 @@ if (document.documentElement.classList.contains("gsap")) {
       { y: 20, autoAlpha: 0, stagger: 0.06, duration: 0.8, ease: "power3.out", onComplete: handBack },
       0.4
     );
-
-  // Nav: slides away while scrolling down, comes back on scroll up
-
-  const siteNav = document.querySelector("#site-nav");
-  const navMenu = document.querySelector("#nav-menu");
-  let navHidden = false;
-
-  ScrollTrigger.create({
-    start: 0,
-    end: "max",
-    onUpdate: (self) => {
-      const hide =
-        self.direction === 1 &&
-        self.scroll() > window.innerHeight * 0.6 &&
-        !navMenu.classList.contains("is-open");
-      if (hide === navHidden) return;
-      navHidden = hide;
-      gsap.to(siteNav, { yPercent: hide ? -100 : 0, duration: 0.45, ease: "power3.out" });
-    },
-  });
 
   // Magnetic buttons: pulled toward the cursor, spring back on leave
 
