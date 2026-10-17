@@ -87,6 +87,7 @@ if (document.documentElement.classList.contains("gsap")) {
   // Hero: rotating word, letters flip out and in while the width eases
 
   const rotatorWord = document.querySelector(".rotator-word");
+  // The longest word also lives in .rotator-ghost in index.html
   const words = ["code", "design", "marketing"];
   let wordIndex = 0;
 

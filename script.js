@@ -82,6 +82,7 @@ if (!useGsap) {
 // Hero: rotating, typed word
 
 const rotatorWord = document.querySelector(".rotator-word");
+// The longest word also lives in .rotator-ghost in index.html
 const words = ["code", "design", "marketing"];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

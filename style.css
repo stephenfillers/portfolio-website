@@ -489,9 +489,26 @@ button {
   margin-bottom: 1.5rem;
 }
 
+/* The hidden ghost holds the longest word's width, so the title wraps the
+   same way whichever word is showing. Keep it in sync with the word lists
+   in script.js and motion.js. */
 .rotator {
+  display: inline-grid;
   color: var(--accent);
   white-space: nowrap;
+}
+
+.rotator-ghost,
+.rotator-live {
+  grid-area: 1 / 1;
+}
+
+.rotator-ghost {
+  visibility: hidden;
+}
+
+.rotator-stop {
+  color: var(--text);
 }
 
 .caret {
@@ -701,6 +718,9 @@ button {
   border-right: 0;
   border-bottom: 0;
   border-radius: 10px 0 0 0;
+  /* Safari drops the rounded clip once GSAP puts the image on its own layer;
+     a stacking context keeps the corner clipped without cutting the shadow */
+  isolation: isolate;
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
 }
 
