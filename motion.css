@@ -38,8 +38,9 @@
   transform-origin: 50% 100%;
 }
 
+/* GSAP owns the screenshot's transform; keep only the hover color fade */
 .gsap .project-media img {
-  transition: none;
+  transition: filter 0.6s var(--ease);
 }
 
 /* Magnetic buttons: GSAP owns transform, so keep only the color transitions */
