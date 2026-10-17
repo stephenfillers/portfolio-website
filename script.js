@@ -356,10 +356,20 @@ const showToast = function (message) {
   toastTimer = setTimeout(() => toast.classList.remove("is-shown"), 2200);
 };
 
+const copyLabel = copyButton.querySelector(".copy-label");
+let copiedTimer = null;
+
 copyButton.addEventListener("click", async function () {
   try {
     await navigator.clipboard.writeText(copyButton.dataset.email);
     showToast("Email copied to clipboard");
+    copyButton.classList.add("is-copied");
+    copyLabel.textContent = "Copied";
+    clearTimeout(copiedTimer);
+    copiedTimer = setTimeout(() => {
+      copyButton.classList.remove("is-copied");
+      copyLabel.textContent = "Copy email";
+    }, 2200);
   } catch {
     showToast(copyButton.dataset.email);
   }
