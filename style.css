@@ -744,6 +744,33 @@ button {
   transform: translate(2px, -2px);
 }
 
+/* Text-only cards for work without a screenshot or public link */
+.project-grid--compact {
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 1.5rem;
+}
+
+.project-card--compact {
+  grid-template-columns: 1fr;
+}
+
+.project-card--compact .project-body {
+  gap: 1.5rem;
+}
+
+.project-card--compact .project-title {
+  font-size: clamp(1.5rem, 2.8vw, 1.9rem);
+}
+
+.project-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  margin-bottom: 0.6rem;
+}
+
 /* ---------- Skills ---------- */
 
 .skill-groups {
@@ -984,6 +1011,29 @@ button {
   color: var(--subtle);
 }
 
+.timeline-points {
+  margin-top: 0.6rem;
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.timeline-points li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.timeline-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 0.35rem;
+  height: 1px;
+  background: var(--border-strong);
+}
+
 .timeline-edu {
   margin-top: 1rem;
 }
@@ -1139,7 +1189,8 @@ svg.fill {
     aspect-ratio: 16 / 10;
   }
 
-  .skill-groups {
+  .skill-groups,
+  .project-grid--compact {
     grid-template-columns: 1fr;
   }
 }

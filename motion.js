@@ -216,26 +216,31 @@ if (document.documentElement.classList.contains("gsap")) {
 
   gsap.utils.toArray(".project-card").forEach((card) => {
     const media = card.querySelector(".project-media");
-    const img = media.querySelector("img");
     const details = card.querySelectorAll(
-      ".project-title, .project-desc, .tags li, .project-actions .btn"
+      ".project-meta, .project-title, .project-desc, .tags li, .project-actions .btn"
     );
 
     prep(details);
 
-    gsap
+    const intro = gsap
       .timeline({ scrollTrigger: onScreen(card, "top 80%") })
       .fromTo(
         card,
         { autoAlpha: 0, y: 70, transition: "none" },
         { autoAlpha: 1, y: 0, duration: 1.1, ease: "expo.out", onComplete: handBack }
       )
-      .from(media, { clipPath: "inset(0% 0% 100% 0%)", duration: 1.3, ease: "expo.inOut" }, 0)
       .from(
         details,
         { y: 18, autoAlpha: 0, stagger: 0.04, duration: 0.8, ease: "power3.out", onComplete: handBack },
         0.35
       );
+
+    // Compact cards have no screenshot to wipe in or parallax
+    if (!media) return;
+
+    const img = media.querySelector("img");
+
+    intro.from(media, { clipPath: "inset(0% 0% 100% 0%)", duration: 1.3, ease: "expo.inOut" }, 0);
 
     gsap.fromTo(
       img,
